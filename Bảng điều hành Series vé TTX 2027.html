@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bảng điều hành Series vé TTX 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Bảng điều hành: thanh tóm tắt trên, bộ lọc khu vực dạng tab, bảng chi tiết có tổng ở chân */
+  --bg:#f5f6f8; --panel:#ffffff; --ink:#18212e; --muted:#5d6878; --line:#dfe3ea;
+  --accent:#1f5fbf; --accent-soft:#e6eefb;
+  --good:#1d7a46; --good-bg:#e3f3ea; --warn:#9a6200; --warn-bg:#fbf0d9; --bad:#b3261e; --bad-bg:#fbe5e3;
+  --font-display:"Be Vietnam Pro",system-ui,sans-serif; --font-body:"Be Vietnam Pro",system-ui,sans-serif; --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#11161e; --panel:#19202b; --ink:#e7ecf3; --muted:#9aa5b5; --line:#2b3442;
+  --accent:#6ea2f0; --accent-soft:#1d2b42;
+  --good:#5cc68a; --good-bg:#16301f; --warn:#e3b45a; --warn-bg:#33280f; --bad:#f08c84; --bad-bg:#3a1a18; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#11161e; --panel:#19202b; --ink:#e7ecf3; --muted:#9aa5b5; --line:#2b3442;
+  --accent:#6ea2f0; --accent-soft:#1d2b42;
+  --good:#5cc68a; --good-bg:#16301f; --warn:#e3b45a; --warn-bg:#33280f; --bad:#f08c84; --bad-bg:#3a1a18; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:14px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding:20px 20px 40px;display:flex;flex-direction:column;gap:16px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px}
+h1{font-family:var(--font-display);font-size:22px;margin:0;font-weight:700;text-wrap:balance}
+.sub{color:var(--muted);font-size:13px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.tile .k{font-size:12px;color:var(--muted)}
+.tile .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.tile .s{font-size:12px;color:var(--muted)}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:4px}
+.bar>i{display:block;height:100%;background:var(--accent)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--line)}
+.tab{border:0;background:none;padding:9px 14px;font:inherit;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tab .n{font-weight:500;font-size:12px;margin-left:4px;color:var(--muted)}
+.tab:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+#q{min-width:240px}
+.btn{font:inherit;font-weight:600;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:7px 12px;cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{opacity:.9;color:#fff}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:1180px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle;white-space:nowrap}
+thead th{position:sticky;top:0;background:var(--panel);font-size:12px;color:var(--muted);font-weight:600;cursor:pointer;user-select:none}
+thead th.num,td.num{text-align:right}
+tr.grp td{background:var(--accent-soft);font-weight:700;color:var(--ink)}
+tfoot td{font-weight:700;border-top:2px solid var(--ink);border-bottom:0}
+td.sp{white-space:normal;min-width:200px}
+.mono{font-family:var(--font-mono);font-size:12px}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600}
+.p-good{background:var(--good-bg);color:var(--good)}.p-warn{background:var(--warn-bg);color:var(--warn)}.p-bad{background:var(--bad-bg);color:var(--bad)}
+.chip{display:inline-block;padding:1px 6px;border-radius:4px;font-size:11px;font-weight:600;border:1px solid var(--line)}
+.chip.git{border-color:var(--warn);color:var(--warn)}.chip.mix{border-color:var(--accent);color:var(--accent)}
+td input.land{width:84px;text-align:right;padding:4px 6px}
+td select.cur{padding:4px;width:66px}
+td input.note,td input.nhom{width:120px;padding:4px 6px}
+td input.nhom{width:56px}
+.mini{width:42px;height:6px;background:var(--line);border-radius:3px;display:inline-block;vertical-align:middle;margin-left:6px;overflow:hidden}
+.mini>i{display:block;height:100%;background:var(--accent)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+summary{cursor:pointer;font-weight:600}
+.cols{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-top:10px}
+@media (max-width:820px){.cols{grid-template-columns:1fr}}
+textarea{width:100%;min-height:150px;font-family:var(--font-mono);font-size:12px}
+.hint{font-size:12px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fx{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center}
+.fx input{width:120px;text-align:right}
+#msg{font-size:12px;color:var(--good);min-height:16px}
+.khtab td,.khtab th{padding:5px 8px;font-size:13px}
+.khtab{min-width:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Bảng điều hành Series vé Thị trường xa 2027</h1>
+      <div class="sub">Trung tâm Khách lẻ Miền Bắc – Vietravel Hà Nội · Số liệu đến 12/11/2026 · Nguồn: KH series vé TTX 2027, CF vé 2027 TTX, 2027 MAI-UPDATE (Úc, Mỹ)</div>
+    </div>
+    <div class="row">
+      <button class="btn" id="btnCopy" type="button">Copy bảng đang lọc</button>
+    </div>
+  </header>
+
+  <section class="tiles" id="tiles" aria-label="Tóm tắt"></section>
+
+  <nav class="tabs" role="tablist" id="tabs" aria-label="Khu vực thị trường"></nav>
+
+  <div class="filters">
+    <label for="q">Tìm tuyến / sản phẩm / code chặng<input id="q" type="search" placeholder="vd. Paris, SVO, Melbourne"></label>
+    <label for="fHang">Hãng<select id="fHang"></select></label>
+    <label for="fLoai">Loại khách<select id="fLoai"><option value="">Tất cả</option><option>FIT</option><option>GIT</option><option>FIT+GIT</option></select></label>
+    <label for="fNhom">Nhóm SP<select id="fNhom"></select></label>
+    <label for="fTT">Trạng thái<select id="fTT"><option value="">Tất cả</option><option>Đã cọc đủ</option><option>Cọc một phần</option><option>Đang chờ</option></select></label>
+    <label for="fGroup">Hiển thị<select id="fGroup"><option value="1">Nhóm theo tuyến</option><option value="0">Danh sách phẳng</option></select></label>
+    <button class="btn" id="btnReset" type="button" style="align-self:flex-end">Xóa lọc</button>
+  </div>
+
+  <div class="panel tablewrap">
+    <table id="tbl">
+      <thead><tr>
+        <th data-k="kv">Khu vực</th><th data-k="sp">Tuyến / Sản phẩm</th><th data-k="hang">Hãng</th><th data-k="ht">Hành trình bay (block)</th>
+        <th data-k="loai">Loại</th><th data-k="nhom">Nhóm SP</th><th data-k="thang">Tháng KH</th>
+        <th data-k="bkg" class="num">BKG</th><th data-k="tong" class="num">Tổng ghế</th><th data-k="coc" class="num">Đã cọc</th><th data-k="cho" class="num">Ghế chờ</th><th data-k="pct" class="num">% cọc</th>
+        <th data-k="land" class="num">Giá land / khách</th><th>Tiền tệ</th><th data-k="vnd" class="num">Quy đổi (VNĐ)</th><th data-k="tt">Trạng thái</th><th>Ghi chú</th>
+      </tr></thead>
+      <tbody id="tb"></tbody>
+      <tfoot id="tf"></tfoot>
+    </table>
+  </div>
+
+  <details>
+    <summary>Nhu cầu (kế hoạch) so với ghế đã cọc theo tuyến</summary>
+    <div class="tablewrap" style="margin-top:10px"><table class="khtab" id="khtab"></table></div>
+    <p class="hint">Nhu cầu lấy từ file KH series vé TTX 2027 (kế hoạch FIT, chưa tách GIT). Sửa ô nhu cầu nếu kế hoạch thay đổi.</p>
+  </details>
+
+  <details>
+    <summary>Tỷ giá quy đổi và nhập dữ liệu mới</summary>
+    <div class="cols">
+      <div>
+        <p class="hint">Paste dữ liệu từ Excel (mỗi dòng 1 block, các cột cách nhau bằng Tab). Thứ tự cột:<br>
+        <span class="mono">Khu vực · Tuyến · Tuyến/Sản phẩm · Hãng · Hành trình bay · Loại (FIT/GIT/FIT+GIT) · Nhóm SP (L1/L2) · Tháng KH · BKG · Đã cọc · Ghế chờ · Giá land · Tiền tệ · Ghi chú</span><br>
+        Khu vực nhận: Châu Âu, Úc, Mỹ, Trung Đông, Châu Phi. Dòng tiêu đề (nếu có) sẽ được bỏ qua. Tổng ghế = Đã cọc + Ghế chờ.</p>
+        <textarea id="paste" placeholder="Châu Âu	Châu Âu	Châu Âu: Paris – Rome	VN	HAN-CDG//FCO-HAN	FIT	L1	T5	2	52	0	1250	EUR	Mẫu"></textarea>
+        <div class="row" style="margin-top:8px">
+          <button class="btn primary" id="btnAppend" type="button">Thêm vào bảng</button>
+          <button class="btn" id="btnReplace" type="button">Thay toàn bộ bằng dữ liệu paste</button>
+          <button class="btn" id="btnSample" type="button">Khôi phục dữ liệu mẫu</button>
+        </div>
+        <div id="msg" role="status"></div>
+      </div>
+      <div>
+        <p class="hint">Nhập tỷ giá kế toán đang áp dụng để quy đổi giá land sang VNĐ. Để trống thì cột quy đổi hiển thị “–”.</p>
+        <div class="fx">
+          <label for="fxEUR">1 EUR =</label><input id="fxEUR" inputmode="decimal" placeholder="VNĐ">
+          <label for="fxUSD">1 USD =</label><input id="fxUSD" inputmode="decimal" placeholder="VNĐ">
+          <label for="fxAUD">1 AUD =</label><input id="fxAUD" inputmode="decimal" placeholder="VNĐ">
+        </div>
+        <p class="hint">Giá land, tiền tệ, nhóm SP và ghi chú sửa trực tiếp trong bảng; trình duyệt này lưu lại các thay đổi cho lần mở sau.</p>
+      </div>
+    </div>
+  </details>
+</div>
+
+<script>
+const SAMPLE = [{"id": 1, "kv": "Mỹ", "tuyen": "Châu Mỹ", "sp": "Châu Mỹ: Washington – Los Angeles", "hang": "BR", "ht": "HANTPEIAD//LAXTPEHAN", "loai": "FIT", "nhom": "", "bkg": 1, "tong": 21, "coc": 21, "cho": 0, "thang": "T1", "land": null, "cur": "USD", "tt": "Đã cọc đủ", "note": ""}, {"id": 2, "kv": "Châu Phi", "tuyen": "Châu Phi", "sp": "Châu Phi: Cairo", "hang": "EY", "ht": "HAN-CAI-HAN", "loai": "FIT", "nhom": "", "bkg": 2, "tong": 42, "coc": 42, "cho": 0, "thang": "T2–T4", "land": null, "cur": "USD", "tt": "Đã cọc đủ", "note": ""}, {"id": 3, "kv": "Châu Phi", "tuyen": "Châu Phi", "sp": "Châu Phi: Cairo – Istanbul", "hang": "EY", "ht": "HAN-CAI//IST-HAN", "loai": "GIT", "nhom": "", "bkg": 1, "tong": 18, "coc": 18, "cho": 0, "thang": "T2", "land": null, "cur": "USD", "tt": "Đã cọc đủ", "note": ""}, {"id": 4, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Amsterdam", "hang": "VN", "ht": "HAN-AMS-HAN", "loai": "FIT", "nhom": "", "bkg": 9, "tong": 234, "coc": 234, "cho": 0, "thang": "T3–T8", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 5, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Amsterdam – Milan", "hang": "VN", "ht": "HAN-AMS//MXP-HAN", "loai": "FIT", "nhom": "", "bkg": 7, "tong": 182, "coc": 182, "cho": 0, "thang": "T3–T8", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 6, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Berlin – Budapest", "hang": "QR", "ht": "HAN-BER//BUD-HAN", "loai": "FIT+GIT", "nhom": "", "bkg": 1, "tong": 26, "coc": 26, "cho": 0, "thang": "T4", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 7, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Berlin – Budapest", "hang": "TK", "ht": "HAN-BER//BUD-HAN", "loai": "FIT", "nhom": "", "bkg": 3, "tong": 78, "coc": 52, "cho": 26, "thang": "T1–T4", "land": null, "cur": "EUR", "tt": "Cọc một phần", "note": ""}, {"id": 8, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Budapest – Berlin", "hang": "QR", "ht": "HAN-BUD//BER-HAN", "loai": "FIT", "nhom": "", "bkg": 4, "tong": 104, "coc": 0, "cho": 104, "thang": "T4–T11", "land": null, "cur": "EUR", "tt": "Đang chờ", "note": ""}, {"id": 9, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Budapest – Berlin", "hang": "QR", "ht": "HAN-BUD//BER-HAN", "loai": "FIT+GIT", "nhom": "", "bkg": 1, "tong": 26, "coc": 26, "cho": 0, "thang": "T7", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 10, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Budapest – Ljubljana", "hang": "TK", "ht": "HAN-BUD//LJU-HAN", "loai": "FIT", "nhom": "", "bkg": 4, "tong": 94, "coc": 94, "cho": 0, "thang": "T4–T8", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 11, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Copenhagen – Helsinki", "hang": "EK", "ht": "HAN-CPH//HEL-HAN", "loai": "FIT", "nhom": "", "bkg": 5, "tong": 130, "coc": 130, "cho": 0, "thang": "T4–T10", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 12, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Copenhagen – Helsinki", "hang": "QR", "ht": "HAN-CPH//HEL-HAN", "loai": "FIT", "nhom": "", "bkg": 3, "tong": 78, "coc": 0, "cho": 78, "thang": "T6–T9", "land": null, "cur": "EUR", "tt": "Đang chờ", "note": ""}, {"id": 13, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Frankfurt – Paris", "hang": "VN", "ht": "HAN-FRA//CDG-HAN", "loai": "FIT", "nhom": "", "bkg": 5, "tong": 130, "coc": 130, "cho": 0, "thang": "T4–T8", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 14, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Helsinki – Copenhagen", "hang": "QR", "ht": "HAN-HEL//CPH-HAN", "loai": "FIT", "nhom": "", "bkg": 6, "tong": 156, "coc": 78, "cho": 78, "thang": "T2–T8", "land": null, "cur": "EUR", "tt": "Cọc một phần", "note": ""}, {"id": 15, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Milan – Amsterdam", "hang": "VN", "ht": "HAN-MXP//AMS-HAN", "loai": "FIT", "nhom": "", "bkg": 7, "tong": 182, "coc": 182, "cho": 0, "thang": "T3–T7", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 16, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Milan – Amsterdam", "hang": "VN", "ht": "HAN-MXP//AMS-HAN", "loai": "GIT", "nhom": "", "bkg": 1, "tong": 26, "coc": 26, "cho": 0, "thang": "T5", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 17, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Milan – Munich", "hang": "VN", "ht": "HAN-MXP//MUC-HAN", "loai": "GIT", "nhom": "", "bkg": 2, "tong": 52, "coc": 52, "cho": 0, "thang": "T6", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 18, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Munich – Milan", "hang": "VN", "ht": "HAN-MUC//MXP-HAN", "loai": "FIT", "nhom": "", "bkg": 1, "tong": 26, "coc": 26, "cho": 0, "thang": "T4", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 19, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Nice – Lisbon", "hang": "EK", "ht": "HAN-NCE//LIS-HAN", "loai": "FIT", "nhom": "", "bkg": 6, "tong": 151, "coc": 151, "cho": 0, "thang": "T2–T10", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 20, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Paris – Frankfurt", "hang": "VN", "ht": "HAN-CDG//FRA-HAN", "loai": "FIT", "nhom": "", "bkg": 1, "tong": 26, "coc": 26, "cho": 0, "thang": "T4", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 21, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Paris – Milan", "hang": "VN", "ht": "HAN-CDG//MXP-HAN", "loai": "FIT", "nhom": "", "bkg": 8, "tong": 208, "coc": 156, "cho": 52, "thang": "T2–T8", "land": null, "cur": "EUR", "tt": "Cọc một phần", "note": ""}, {"id": 22, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Paris – Munich", "hang": "VN", "ht": "HAN-CDG//MUC-HAN", "loai": "FIT", "nhom": "", "bkg": 2, "tong": 52, "coc": 52, "cho": 0, "thang": "T2–T6", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 23, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Paris – Rome", "hang": "EK", "ht": "HAN-CDG//FCO-HAN", "loai": "FIT", "nhom": "", "bkg": 3, "tong": 68, "coc": 68, "cho": 0, "thang": "T1–T6", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 24, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Paris – Rome", "hang": "QR", "ht": "HAN-CDG//FCO-HAN", "loai": "FIT", "nhom": "", "bkg": 1, "tong": 26, "coc": 0, "cho": 26, "thang": "T1", "land": null, "cur": "EUR", "tt": "Đang chờ", "note": ""}, {"id": 25, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Paris – Rome", "hang": "TK", "ht": "HAN-CDG//FCO-HAN", "loai": "FIT", "nhom": "", "bkg": 5, "tong": 130, "coc": 130, "cho": 0, "thang": "T4–T8", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 26, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Paris – Rome", "hang": "TK", "ht": "HAN-CDG//FCO-HAN", "loai": "GIT", "nhom": "", "bkg": 5, "tong": 130, "coc": 0, "cho": 130, "thang": "T5–T6", "land": null, "cur": "EUR", "tt": "Đang chờ", "note": ""}, {"id": 27, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Rome – Paris", "hang": "TK", "ht": "HAN-FCO//CDG-HAN", "loai": "FIT", "nhom": "", "bkg": 3, "tong": 74, "coc": 48, "cho": 26, "thang": "T1–T2", "land": null, "cur": "EUR", "tt": "Cọc một phần", "note": ""}, {"id": 28, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Rome – Zurich", "hang": "QR", "ht": "HAN-FCO//ZRH-HAN", "loai": "FIT", "nhom": "", "bkg": 6, "tong": 130, "coc": 26, "cho": 104, "thang": "T2–T12", "land": null, "cur": "EUR", "tt": "Cọc một phần", "note": ""}, {"id": 29, "kv": "Châu Âu", "tuyen": "Châu Âu", "sp": "Châu Âu: Zurich – Rome", "hang": "QR", "ht": "HAN-ZRH//FCO-HAN", "loai": "FIT+GIT", "nhom": "", "bkg": 2, "tong": 52, "coc": 52, "cho": 0, "thang": "T4–T6", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 30, "kv": "Úc", "tuyen": "Châu Úc", "sp": "Châu Úc: Auckland", "hang": "MH", "ht": "HANKUL-AKL-KULHAN", "loai": "FIT", "nhom": "", "bkg": 2, "tong": 38, "coc": 38, "cho": 0, "thang": "T2–T4", "land": null, "cur": "AUD", "tt": "Đã cọc đủ", "note": ""}, {"id": 31, "kv": "Úc", "tuyen": "Châu Úc", "sp": "Châu Úc: Melbourne – Sydney", "hang": "VN", "ht": "HAN-MEL//SYD-HAN", "loai": "FIT", "nhom": "", "bkg": 11, "tong": 251, "coc": 225, "cho": 26, "thang": "T2–T8", "land": null, "cur": "AUD", "tt": "Cọc một phần", "note": ""}, {"id": 32, "kv": "Úc", "tuyen": "Châu Úc", "sp": "Châu Úc: Melbourne – Sydney", "hang": "VN", "ht": "HAN-MEL//SYD-HAN", "loai": "GIT", "nhom": "", "bkg": 3, "tong": 73, "coc": 73, "cho": 0, "thang": "T4–T9", "land": null, "cur": "AUD", "tt": "Đã cọc đủ", "note": ""}, {"id": 33, "kv": "Úc", "tuyen": "Châu Úc", "sp": "Châu Úc: Sydney – Melbourne", "hang": "VN", "ht": "HAN-SYD//MEL-HAN", "loai": "FIT", "nhom": "", "bkg": 13, "tong": 303, "coc": 199, "cho": 104, "thang": "T1–T9", "land": null, "cur": "AUD", "tt": "Cọc một phần", "note": ""}, {"id": 34, "kv": "Úc", "tuyen": "Châu Úc", "sp": "Châu Úc: Sydney – Melbourne", "hang": "VN", "ht": "HAN-SYD//MEL-HAN", "loai": "GIT", "nhom": "", "bkg": 2, "tong": 47, "coc": 47, "cho": 0, "thang": "T6–T9", "land": null, "cur": "AUD", "tt": "Đã cọc đủ", "note": ""}, {"id": 35, "kv": "Trung Đông", "tuyen": "Dubai", "sp": "Dubai: Abu Dhabi", "hang": "EY", "ht": "HAN-AUH-HAN", "loai": "FIT", "nhom": "", "bkg": 7, "tong": 162, "coc": 162, "cho": 0, "thang": "T2–T3", "land": null, "cur": "USD", "tt": "Đã cọc đủ", "note": ""}, {"id": 36, "kv": "Châu Âu", "tuyen": "Nga", "sp": "Nga: Moscow", "hang": "VN", "ht": "HAN-SVO-HAN", "loai": "FIT", "nhom": "", "bkg": 38, "tong": 943, "coc": 813, "cho": 130, "thang": "T2–T9", "land": null, "cur": "USD", "tt": "Cọc một phần", "note": ""}, {"id": 37, "kv": "Châu Âu", "tuyen": "Nga", "sp": "Nga: Moscow", "hang": "VN", "ht": "HAN-SVO-HAN", "loai": "GIT", "nhom": "", "bkg": 7, "tong": 182, "coc": 182, "cho": 0, "thang": "T6–T9", "land": null, "cur": "USD", "tt": "Đã cọc đủ", "note": ""}, {"id": 38, "kv": "Trung Đông", "tuyen": "Thổ Nhĩ Kỳ", "sp": "Thổ Nhĩ Kỳ: Cappadocia – Istanbul", "hang": "TK", "ht": "HAN-NAV//IST-HAN", "loai": "FIT", "nhom": "", "bkg": 1, "tong": 26, "coc": 26, "cho": 0, "thang": "T4", "land": null, "cur": "EUR", "tt": "Đã cọc đủ", "note": ""}, {"id": 39, "kv": "Trung Đông", "tuyen": "Thổ Nhĩ Kỳ", "sp": "Thổ Nhĩ Kỳ: Istanbul", "hang": "CA", "ht": "HAN-PEK-IST-PEK-HAN", "loai": "FIT", "nhom": "", "bkg": 3, "tong": 78, "coc": 0, "cho": 78, "thang": "T3–T4", "land": null, "cur": "EUR", "tt": "Đang chờ", "note": ""}, {"id": 40, "kv": "Trung Đông", "tuyen": "Thổ Nhĩ Kỳ", "sp": "Thổ Nhĩ Kỳ: Kayseri – Istanbul", "hang": "TK", "ht": "HAN-ASR//IST-HAN", "loai": "FIT", "nhom": "", "bkg": 18, "tong": 396, "coc": 318, "cho": 78, "thang": "T1–T8", "land": null, "cur": "EUR", "tt": "Cọc một phần", "note": ""}];
+const KH0 = {"Châu Âu":3143,"Nga":1002,"Châu Úc":766,"Thổ Nhĩ Kỳ":521,"Dubai":377,"Châu Phi":320,"Châu Mỹ":339};
+const REG_OF = {"Châu Âu":"Châu Âu","Nga":"Châu Âu","Châu Úc":"Úc","Thổ Nhĩ Kỳ":"Trung Đông","Dubai":"Trung Đông","Châu Phi":"Châu Phi","Châu Mỹ":"Mỹ"};
+const REGIONS = ["Tất cả","Châu Âu","Úc","Mỹ","Trung Đông","Châu Phi"];
+const KEY = "ttx2027-series-v1";
+const fmt = n => (n==null||n===""||isNaN(n)) ? "–" : Math.round(n).toLocaleString("vi-VN");
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function load(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+let rows = load(KEY+":rows", null) || JSON.parse(JSON.stringify(SAMPLE));
+let kh = load(KEY+":kh", null) || {...KH0};
+let fx = load(KEY+":fx", {EUR:"",USD:"",AUD:""});
+let st = {tab:"Tất cả", sort:null, dir:1};
+const $ = id => document.getElementById(id);
+function status(r){ return r.cho<=0 ? "Đã cọc đủ" : (r.coc<=0 ? "Đang chờ" : "Cọc một phần"); }
+function norm(r){ r.tong=(+r.coc||0)+(+r.cho||0); r.tt=status(r); return r; }
+rows.forEach(norm);
+function vnd(r){ const rate=parseFloat(String(fx[r.cur]||"").replace(/[.\s]/g,"").replace(",",".")); const l=parseFloat(r.land); return (rate&&l)? l*rate : null; }
+function filtered(){
+  const q=$("q").value.trim().toLowerCase(), h=$("fHang").value, lo=$("fLoai").value, nh=$("fNhom").value, tt=$("fTT").value;
+  let out=rows.filter(r=>(st.tab==="Tất cả"||r.kv===st.tab)&&(!h||r.hang===h)&&(!lo||r.loai===lo)&&(!nh||(r.nhom||"(chưa gán)")===nh)&&(!tt||r.tt===tt)
+    &&(!q||[r.sp,r.tuyen,r.ht,r.hang,r.note].join(" ").toLowerCase().includes(q)));
+  if(st.sort){const k=st.sort;out.sort((a,b)=>{const va=k==="pct"?(a.tong?a.coc/a.tong:0):k==="vnd"?(vnd(a)||0):a[k],vb=k==="pct"?(b.tong?b.coc/b.tong:0):k==="vnd"?(vnd(b)||0):b[k];return (typeof va==="number"&&typeof vb==="number"?va-vb:String(va??"").localeCompare(String(vb??""),"vi"))*st.dir});}
+  return out;
+}
+function pill(t){const c=t==="Đã cọc đủ"?"p-good":t==="Cọc một phần"?"p-warn":"p-bad";return `<span class="pill ${c}">${t}</span>`}
+function chip(l){const c=l==="GIT"?"git":l==="FIT+GIT"?"mix":"";return `<span class="chip ${c}">${esc(l)}</span>`}
+function rowHtml(r){
+  const p=r.tong?r.coc/r.tong:0, v=vnd(r);
+  return `<tr data-id="${r.id}"><td>${esc(r.kv)}</td><td class="sp">${esc(r.sp)}</td><td>${esc(r.hang)}</td><td class="mono">${esc(r.ht)}</td><td>${chip(r.loai)}</td>
+  <td><input class="nhom" aria-label="Nhóm SP" data-f="nhom" value="${esc(r.nhom)}" placeholder="L1/L2"></td><td>${esc(r.thang)}</td>
+  <td class="num">${fmt(r.bkg)}</td><td class="num">${fmt(r.tong)}</td><td class="num">${fmt(r.coc)}</td><td class="num">${fmt(r.cho)}</td>
+  <td class="num">${Math.round(p*100)}%<span class="mini"><i style="width:${Math.round(p*100)}%"></i></span></td>
+  <td class="num"><input class="land" aria-label="Giá land" data-f="land" inputmode="decimal" value="${r.land??""}" placeholder="nhập"></td>
+  <td><select class="cur" aria-label="Tiền tệ" data-f="cur">${["EUR","USD","AUD","VND"].map(c=>`<option${c===r.cur?" selected":""}>${c}</option>`).join("")}</select></td>
+  <td class="num">${r.cur==="VND"&&r.land?fmt(r.land):fmt(v)}</td><td>${pill(r.tt)}</td>
+  <td><input class="note" aria-label="Ghi chú" data-f="note" value="${esc(r.note)}"></td></tr>`;
+}
+function sums(list){return list.reduce((s,r)=>(s.bkg+=+r.bkg||0,s.tong+=r.tong,s.coc+=+r.coc||0,s.cho+=+r.cho||0,s),{bkg:0,tong:0,coc:0,cho:0})}
+function render(){
+  // tabs
+  $("tabs").innerHTML=REGIONS.map(g=>{const n=g==="Tất cả"?rows.length:rows.filter(r=>r.kv===g).length;return `<button class="tab" role="tab" aria-selected="${g===st.tab}" data-g="${g}">${g}<span class="n">${n}</span></button>`}).join("");
+  // filter options
+  const hs=[...new Set(rows.map(r=>r.hang))].sort(); const hv=$("fHang").value;
+  $("fHang").innerHTML=`<option value="">Tất cả</option>`+hs.map(h=>`<option${h===hv?" selected":""}>${esc(h)}</option>`).join("");
+  const ns=[...new Set(rows.map(r=>r.nhom||"(chưa gán)"))].sort(); const nv=$("fNhom").value;
+  $("fNhom").innerHTML=`<option value="">Tất cả</option>`+ns.map(h=>`<option${h===nv?" selected":""}>${esc(h)}</option>`).join("");
+  const list=filtered(); const S=sums(list);
+  let body="";
+  if($("fGroup").value==="1"&&!st.sort){
+    const order=Object.keys(KH0); const groups={};
+    list.forEach(r=>(groups[r.tuyen]=groups[r.tuyen]||[]).push(r));
+    Object.keys(groups).sort((a,b)=>(order.indexOf(a)+99*(order.indexOf(a)<0))-(order.indexOf(b)+99*(order.indexOf(b)<0))).forEach(t=>{
+      const g=groups[t], s=sums(g);
+      body+=`<tr class="grp"><td colspan="7">${esc(t)} · ${g.length} block</td><td class="num">${fmt(s.bkg)}</td><td class="num">${fmt(s.tong)}</td><td class="num">${fmt(s.coc)}</td><td class="num">${fmt(s.cho)}</td><td class="num">${s.tong?Math.round(s.coc/s.tong*100):0}%</td><td colspan="5"></td></tr>`;
+      body+=g.map(rowHtml).join("");
+    });
+  } else body=list.map(rowHtml).join("");
+  $("tb").innerHTML=body||`<tr><td colspan="17" class="hint">Không có dòng nào khớp bộ lọc.</td></tr>`;
+  $("tf").innerHTML=`<tr><td colspan="7">TỔNG (${list.length} block đang hiển thị)</td><td class="num">${fmt(S.bkg)}</td><td class="num">${fmt(S.tong)}</td><td class="num">${fmt(S.coc)}</td><td class="num">${fmt(S.cho)}</td><td class="num">${S.tong?Math.round(S.coc/S.tong*100):0}%</td><td colspan="5"></td></tr>`;
+  // tiles
+  const tuyens=Object.keys(kh).filter(t=>st.tab==="Tất cả"||REG_OF[t]===st.tab);
+  const K=tuyens.reduce((s,t)=>s+(+kh[t]||0),0);
+  const pk=K?S.coc/K:0;
+  $("tiles").innerHTML=`
+   <div class="tile"><span class="k">Nhu cầu kế hoạch (${esc(st.tab)})</span><span class="v">${fmt(K)}</span><span class="s">ghế · theo file KH</span></div>
+   <div class="tile"><span class="k">Tổng ghế đang giữ</span><span class="v">${fmt(S.tong)}</span><span class="s">${fmt(S.bkg)} BKG theo bộ lọc</span></div>
+   <div class="tile"><span class="k">Đã xác nhận & cọc</span><span class="v">${fmt(S.coc)}</span><span class="s">${Math.round(pk*100)}% nhu cầu</span><div class="bar"><i style="width:${Math.min(100,pk*100)}%"></i></div></div>
+   <div class="tile"><span class="k">Ghế chờ (chưa cọc / chờ hãng)</span><span class="v">${fmt(S.cho)}</span><span class="s">cần chốt hoặc nhả</span></div>
+   <div class="tile"><span class="k">Còn thiếu so với nhu cầu</span><span class="v">${fmt(Math.max(0,K-S.coc-S.cho))}</span><span class="s">chưa có nguồn vé</span></div>`;
+  // kh table
+  const byT={}; rows.forEach(r=>{byT[r.tuyen]=byT[r.tuyen]||{coc:0,cho:0};byT[r.tuyen].coc+=+r.coc||0;byT[r.tuyen].cho+=+r.cho||0});
+  $("khtab").innerHTML=`<thead><tr><th>Tuyến</th><th>Khu vực</th><th class="num">Nhu cầu</th><th class="num">Đã cọc</th><th class="num">Chờ</th><th class="num">% cọc / nhu cầu</th></tr></thead><tbody>`+
+   Object.keys(kh).map(t=>{const b=byT[t]||{coc:0,cho:0};const p=kh[t]?b.coc/kh[t]:0;return `<tr><td>${esc(t)}</td><td>${esc(REG_OF[t]||"")}</td><td class="num"><input class="land" aria-label="Nhu cầu ${esc(t)}" data-kh="${esc(t)}" value="${kh[t]}"></td><td class="num">${fmt(b.coc)}</td><td class="num">${fmt(b.cho)}</td><td class="num">${Math.round(p*100)}%<span class="mini"><i style="width:${Math.min(100,Math.round(p*100))}%"></i></span></td></tr>`}).join("")+`</tbody>`;
+  ["EUR","USD","AUD"].forEach(c=>{if(document.activeElement!==$("fx"+c))$("fx"+c).value=fx[c]||""});
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest(".tab"); if(t){st.tab=t.dataset.g;render();return}
+  const th=e.target.closest("thead th[data-k]"); if(th&&th.closest("#tbl")){const k=th.dataset.k; if(st.sort===k){st.dir=-st.dir} else {st.sort=k;st.dir=1} render();}
+});
+document.addEventListener("change",e=>{
+  const el=e.target;
+  if(el.dataset.f){const id=+el.closest("tr").dataset.id;const r=rows.find(x=>x.id===id); if(r){r[el.dataset.f]=el.value; save(KEY+":rows",rows); render();}}
+  if(el.dataset.kh){kh[el.dataset.kh]=+el.value||0; save(KEY+":kh",kh); render();}
+});
+["q"].forEach(id=>$(id).addEventListener("input",render));
+["fHang","fLoai","fNhom","fTT","fGroup"].forEach(id=>$(id).addEventListener("change",render));
+["EUR","USD","AUD"].forEach(c=>$("fx"+c).addEventListener("input",e=>{fx[c]=e.target.value;save(KEY+":fx",fx);render()}));
+$("btnReset").onclick=()=>{$("q").value="";["fHang","fLoai","fNhom","fTT"].forEach(id=>$(id).value="");st.sort=null;render()};
+const REGN={"chau au":"Châu Âu","au":"Châu Âu","uc":"Úc","my":"Mỹ","trung dong":"Trung Đông","chau phi":"Châu Phi","phi":"Châu Phi"};
+const strip=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").toLowerCase().trim();
+function parsePaste(){
+  const lines=$("paste").value.split(/\r?\n/).map(l=>l.trim()).filter(Boolean); const out=[]; let bad=0; let id=Math.max(0,...rows.map(r=>r.id))+1;
+  for(const l of lines){const c=l.split("\t"); if(strip(c[0])==="khu vuc"){continue}
+    const kv=REGN[strip(c[0])]; const num=x=>parseFloat(String(x||"").replace(/[.\s]/g,"").replace(",","."))||0;
+    if(!kv||c.length<11){bad++;continue}
+    out.push(norm({id:id++,kv,tuyen:c[1]||kv,sp:c[2]||c[1]||kv,hang:c[3]||"",ht:c[4]||"",loai:(c[5]||"FIT").toUpperCase(),nhom:c[6]||"",thang:c[7]||"",bkg:num(c[8]),coc:num(c[9]),cho:num(c[10]),land:c[11]?num(c[11]):null,cur:(c[12]||"USD").toUpperCase(),note:c[13]||""}));}
+  return {out,bad};
+}
+function msg(t){$("msg").textContent=t}
+$("btnAppend").onclick=()=>{const {out,bad}=parsePaste(); rows=rows.concat(out); out.forEach(r=>{if(!(r.tuyen in kh)){kh[r.tuyen]=0;REG_OF[r.tuyen]=r.kv}}); save(KEY+":rows",rows); save(KEY+":kh",kh); render(); msg(`Đã thêm ${out.length} dòng${bad?`, bỏ qua ${bad} dòng sai định dạng (kiểm tra cột Khu vực và đủ 11 cột đầu)`:""}.`)};
+$("btnReplace").onclick=()=>{const {out,bad}=parsePaste(); if(!out.length){msg("Không đọc được dòng nào. Kiểm tra dữ liệu paste có các cột cách nhau bằng Tab.");return} rows=out; save(KEY+":rows",rows); render(); msg(`Đã thay bảng bằng ${out.length} dòng${bad?`, bỏ qua ${bad} dòng sai định dạng`:""}.`)};
+$("btnSample").onclick=()=>{rows=JSON.parse(JSON.stringify(SAMPLE)).map(norm); kh={...KH0}; save(KEY+":rows",rows); save(KEY+":kh",kh); render(); msg("Đã khôi phục dữ liệu mẫu ngày 12/11/2026.")};
+$("btnCopy").onclick=async()=>{const list=filtered(); const head=["Khu vực","Tuyến","Tuyến/Sản phẩm","Hãng","Hành trình bay","Loại","Nhóm SP","Tháng KH","BKG","Đã cọc","Ghế chờ","Giá land","Tiền tệ","Ghi chú","Tổng ghế","Trạng thái"];
+  const txt=[head.join("\t")].concat(list.map(r=>[r.kv,r.tuyen,r.sp,r.hang,r.ht,r.loai,r.nhom,r.thang,r.bkg,r.coc,r.cho,r.land??"",r.cur,r.note,r.tong,r.tt].join("\t"))).join("\n");
+  try{await navigator.clipboard.writeText(txt); $("btnCopy").textContent="Đã copy – dán vào Excel"; setTimeout(()=>$("btnCopy").textContent="Copy bảng đang lọc",2000)}catch(e){$("btnCopy").textContent="Trình duyệt chặn copy"}};
+render();
+</script>
+</body>
+</html>
